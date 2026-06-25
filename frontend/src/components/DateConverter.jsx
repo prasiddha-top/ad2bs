@@ -1,7 +1,7 @@
 import { useState, useCallback, useEffect } from 'react'
 import './DateConverter.css'
 
-const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000'
+const API_BASE = import.meta.env.VITE_API_URL || ''
 
 const BS_MONTHS = [
   { num: 1,  en: 'Baisakh',  ne: 'बैशाख'  },
