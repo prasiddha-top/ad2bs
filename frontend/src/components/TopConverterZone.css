@@ -1,0 +1,94 @@
+/* ─── Top Converter Zone Layout ─────────────────── */
+
+.cz-section {
+  padding: 36px 0;
+  background: #090911;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cz-layout {
+  display: grid;
+  grid-template-columns: 160px 1fr 160px;
+  gap: 28px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  align-items: start;
+}
+
+/* ─── Sticky Sidebar Ads ────────────────────────── */
+.cz-sidebar {
+  position: sticky;
+  top: 88px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.cz-sidebar-label {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #3b3b5c;
+  text-align: center;
+  width: 100%;
+}
+
+.cz-sidebar ins {
+  background: #0d0d18;
+  border: 1px dashed rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  min-width: 160px;
+  min-height: 600px;
+  display: block;
+}
+
+/* ─── Center Column ─────────────────────────────── */
+.cz-center {
+  min-width: 0;
+}
+
+.cz-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.cz-title {
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 800;
+  color: #f0f0f8;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+
+.cz-subtitle {
+  font-size: 0.9rem;
+  color: #7d7d9e;
+  line-height: 1.5;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.cz-subtitle-ne {
+  font-family: var(--font-nepali);
+  font-size: 0.88rem;
+  color: #bfa353;
+  margin-top: 4px;
+}
+
+/* ─── Responsive Styles ─────────────────────────── */
+@media (max-width: 960px) {
+  .cz-layout {
+    grid-template-columns: 1fr;
+    padding: 0 16px;
+  }
+  .cz-sidebar {
+    display: none; /* Hide side ads on smaller screens, standard inline ones take over */
+  }
+  .cz-section {
+    padding: 24px 0;
+  }
+}

@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import './DateConverter.css'
 
 const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000'
@@ -36,6 +36,13 @@ export default function DateConverter({ defaultMode = 'ad-to-bs' }) {
   const [bsYear,  setBsYear]  = useState(2083)
   const [bsMonth, setBsMonth] = useState(3)
   const [bsDay,   setBsDay]   = useState(11)
+
+  // Sync mode with prop changes (if any)
+  useEffect(() => {
+    setMode(defaultMode)
+    setResult(null)
+    setError(null)
+  }, [defaultMode])
 
   const handleConvert = useCallback(async () => {
     setLoading(true); setError(null); setResult(null)
@@ -76,31 +83,31 @@ export default function DateConverter({ defaultMode = 'ad-to-bs' }) {
 
   return (
     <div className="dc-root">
-      {/* ── Direction Pills ─────────────────────────── */}
-      <div className="dc-pills" role="tablist">
-        <button
-          id="tab-ad-to-bs"
-          role="tab"
-          aria-selected={mode === 'ad-to-bs'}
-          className={`dc-pill ${mode === 'ad-to-bs' ? 'dc-pill--active' : ''}`}
-          onClick={() => { setMode('ad-to-bs'); setResult(null); setError(null) }}
-        >
-          <span className="dc-pill-flag">🌐</span>
-          <span className="dc-pill-label">AD → BS</span>
-          <span className="dc-pill-hint">Gregorian to Nepali</span>
-        </button>
+      {/* ── Segmented Control Switch ─────────────────── */}
+      <div className="dc-tabs-container">
+        <div className="dc-tabs" role="tablist">
+          <button
+            id="tab-ad-to-bs"
+            role="tab"
+            aria-selected={mode === 'ad-to-bs'}
+            className={`dc-tab ${mode === 'ad-to-bs' ? 'dc-tab--active' : ''}`}
+            onClick={() => { setMode('ad-to-bs'); setResult(null); setError(null) }}
+          >
+            <span className="dc-tab-emoji">🌐</span>
+            <span className="dc-tab-text">AD to BS</span>
+          </button>
 
-        <button
-          id="tab-bs-to-ad"
-          role="tab"
-          aria-selected={mode === 'bs-to-ad'}
-          className={`dc-pill ${mode === 'bs-to-ad' ? 'dc-pill--active dc-pill--bs' : ''}`}
-          onClick={() => { setMode('bs-to-ad'); setResult(null); setError(null) }}
-        >
-          <span className="dc-pill-flag">🏔️</span>
-          <span className="dc-pill-label">BS → AD</span>
-          <span className="dc-pill-hint">Nepali to Gregorian</span>
-        </button>
+          <button
+            id="tab-bs-to-ad"
+            role="tab"
+            aria-selected={mode === 'bs-to-ad'}
+            className={`dc-tab ${mode === 'bs-to-ad' ? 'dc-tab--active' : ''}`}
+            onClick={() => { setMode('bs-to-ad'); setResult(null); setError(null) }}
+          >
+            <span className="dc-tab-emoji">🏔️</span>
+            <span className="dc-tab-text">BS to AD</span>
+          </button>
+        </div>
       </div>
 
       {/* ── Card ────────────────────────────────────── */}
@@ -108,16 +115,16 @@ export default function DateConverter({ defaultMode = 'ad-to-bs' }) {
         {/* top row: label + quick actions */}
         <div className="dc-card-top">
           <span className="dc-card-title">
-            {mode === 'ad-to-bs' ? 'Enter Gregorian (AD) Date' : 'Enter Nepali (BS) Date'}
+            {mode === 'ad-to-bs' ? 'Gregorian Date (AD)' : 'Nepali Date (BS)'}
           </span>
           <div className="dc-actions">
-            <button id="btn-today" className="dc-action-btn" onClick={handleToday}>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-              Today
+            <button id="btn-today" className="dc-action-btn" onClick={handleToday} title="Use Today's Date">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+              <span>Today</span>
             </button>
-            <button id="btn-swap" className="dc-action-btn dc-action-btn--swap" onClick={handleSwap} title="Swap direction">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
-              Swap
+            <button id="btn-swap" className="dc-action-btn" onClick={handleSwap} title="Swap Converter Direction">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+              <span>Swap</span>
             </button>
           </div>
         </div>
@@ -127,19 +134,19 @@ export default function DateConverter({ defaultMode = 'ad-to-bs' }) {
           {mode === 'ad-to-bs' ? (
             <>
               <div className="dc-field">
-                <label htmlFor="ad-year" className="dc-label">Year</label>
+                <label htmlFor="ad-year" className="dc-label">Year (AD)</label>
                 <select id="ad-year" className="dc-select" value={adYear} onChange={e => setAdYear(Number(e.target.value))}>
                   {adYears.map(y => <option key={y} value={y}>{y}</option>)}
                 </select>
               </div>
               <div className="dc-field dc-field--wide">
-                <label htmlFor="ad-month" className="dc-label">Month</label>
+                <label htmlFor="ad-month" className="dc-label">Month (AD)</label>
                 <select id="ad-month" className="dc-select" value={adMonth} onChange={e => setAdMonth(Number(e.target.value))}>
                   {AD_MONTHS.map((name, i) => <option key={i+1} value={i+1}>{name}</option>)}
                 </select>
               </div>
               <div className="dc-field dc-field--narrow">
-                <label htmlFor="ad-day" className="dc-label">Day</label>
+                <label htmlFor="ad-day" className="dc-label">Day (AD)</label>
                 <select id="ad-day" className="dc-select" value={adDay} onChange={e => setAdDay(Number(e.target.value))}>
                   {Array.from({ length: 31 }, (_, i) => i+1).map(d => <option key={d} value={d}>{d}</option>)}
                 </select>
@@ -148,19 +155,19 @@ export default function DateConverter({ defaultMode = 'ad-to-bs' }) {
           ) : (
             <>
               <div className="dc-field">
-                <label htmlFor="bs-year" className="dc-label">BS Year</label>
+                <label htmlFor="bs-year" className="dc-label">Year (BS)</label>
                 <select id="bs-year" className="dc-select" value={bsYear} onChange={e => setBsYear(Number(e.target.value))}>
                   {bsYears.map(y => <option key={y} value={y}>{y}</option>)}
                 </select>
               </div>
               <div className="dc-field dc-field--wide">
-                <label htmlFor="bs-month" className="dc-label">Month <span className="dc-label-ne">महिना</span></label>
+                <label htmlFor="bs-month" className="dc-label">Month (BS)</label>
                 <select id="bs-month" className="dc-select" value={bsMonth} onChange={e => setBsMonth(Number(e.target.value))}>
-                  {BS_MONTHS.map(m => <option key={m.num} value={m.num}>{m.en} — {m.ne}</option>)}
+                  {BS_MONTHS.map(m => <option key={m.num} value={m.num}>{m.en} ({m.ne})</option>)}
                 </select>
               </div>
               <div className="dc-field dc-field--narrow">
-                <label htmlFor="bs-day" className="dc-label">Day</label>
+                <label htmlFor="bs-day" className="dc-label">Day (BS)</label>
                 <select id="bs-day" className="dc-select" value={bsDay} onChange={e => setBsDay(Number(e.target.value))}>
                   {Array.from({ length: 32 }, (_, i) => i+1).map(d => <option key={d} value={d}>{d}</option>)}
                 </select>
@@ -177,17 +184,24 @@ export default function DateConverter({ defaultMode = 'ad-to-bs' }) {
           disabled={loading}
           aria-busy={loading}
         >
-          {loading
-            ? <><span className="dc-spinner" /><span>Converting…</span></>
-            : <><span className="dc-btn-icon">⇄</span><span>Convert Date</span></>
-          }
+          {loading ? (
+            <span className="dc-spinner-row">
+              <span className="dc-spinner" />
+              <span>Converting...</span>
+            </span>
+          ) : (
+            <span className="dc-btn-row">
+              <svg className="dc-btn-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+              <span>Convert Date</span>
+            </span>
+          )}
         </button>
 
         {/* error */}
         {error && (
           <div className="dc-error" role="alert">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            {error}
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span>{error}</span>
           </div>
         )}
 
@@ -195,10 +209,10 @@ export default function DateConverter({ defaultMode = 'ad-to-bs' }) {
         {result && !error && (
           <div className="dc-result" aria-live="polite">
             <div className="dc-result-header">
-              <span className="dc-result-label">Result</span>
+              <span className="dc-result-label">Converted Date</span>
               <span className="dc-accurate-badge">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M20 6L9 17l-5-5"/></svg>
-                Accurate
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>Accurate</span>
               </span>
             </div>
 
@@ -215,9 +229,9 @@ export default function DateConverter({ defaultMode = 'ad-to-bs' }) {
                 <p className="dc-result-day">{result.ad.dayNameEn}</p>
               </div>
 
-              {/* arrow divider */}
+              {/* Arrow separator */}
               <div className="dc-result-divider" aria-hidden="true">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </div>
 
               {/* TO */}
@@ -235,11 +249,11 @@ export default function DateConverter({ defaultMode = 'ad-to-bs' }) {
 
             {/* meta strip */}
             <div className="dc-result-meta">
-              <span>AD&nbsp;<strong>{result.ad.formatted}</strong></span>
-              <span className="dc-meta-sep">→</span>
-              <span>BS&nbsp;<strong>{result.bs.formatted}</strong></span>
-              <span className="dc-meta-sep">·</span>
-              <span>{result.ad.dayNameEn}</span>
+              <span>AD <strong>{result.ad.formatted}</strong></span>
+              <span className="dc-meta-sep">|</span>
+              <span>BS <strong>{result.bs.formatted}</strong></span>
+              <span className="dc-meta-sep">|</span>
+              <span>{result.ad.dayNameEn} ({result.bs.dayNameNe})</span>
             </div>
           </div>
         )}

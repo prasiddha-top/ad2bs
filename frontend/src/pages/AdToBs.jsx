@@ -1,4 +1,4 @@
-import DateConverter from '../components/DateConverter'
+import TopConverterZone from '../components/TopConverterZone'
 import AdBanner from '../components/AdBanner'
 import TodayDate from '../components/TodayDate'
 import './PageLayout.css'
@@ -6,30 +6,25 @@ import './PageLayout.css'
 export default function AdToBs() {
   return (
     <div className="page">
-      <div className="container">
-        <div className="page-hero">
-          <div className="badge badge-primary">AD → BS Conversion</div>
-          <h1 className="page-title">
-            AD to BS Converter
-          </h1>
-          <p className="page-subtitle">
-            Convert any <strong>Gregorian (AD / Anno Domini)</strong> date to{' '}
-            <strong>Bikram Sambat (BS)</strong> Nepali calendar date.
-            Accurate data from <strong>1913 AD to 2043 AD</strong>.
-          </p>
-        </div>
+      {/* ── Top Converter Zone (at the very top of the page) ── */}
+      <TopConverterZone
+        title="AD to BS Converter"
+        subtitle="Convert Gregorian (AD) dates to Bikram Sambat (BS) Nepali calendar dates. Accurate from 1913 AD to 2043 AD."
+        subtitleNe="एडी देखि बिएस मा मिति रूपान्तरण गर्नुहोस्"
+        defaultMode="ad-to-bs"
+      />
 
+      <div className="container mt-lg">
+        {/* Today date widget */}
         <TodayDate />
 
-        <AdBanner format="horizontal" className="ad-leaderboard mb-lg" />
-
-        <DateConverter defaultMode="ad-to-bs" />
-
-        <div className="flex-center mt-xl">
-          <AdBanner format="rectangle" className="ad-rectangle" />
+        {/* Horizontal Ad banner */}
+        <div className="inline-ad-row mt-md mb-lg">
+          <AdBanner format="horizontal" className="ad-leaderboard" />
         </div>
 
-        <section className="page-info mt-xl">
+        {/* How-To & Info */}
+        <section className="page-info">
           <h2>How to Convert AD to BS</h2>
           <ol className="how-to-list">
             <li>Select the <strong>Year</strong> in AD (Gregorian) format</li>
@@ -55,6 +50,11 @@ export default function AdToBs() {
             ))}
           </div>
         </section>
+
+        {/* Rectangle ad */}
+        <div className="flex-center mt-xl">
+          <AdBanner format="rectangle" className="ad-rectangle" />
+        </div>
       </div>
     </div>
   )

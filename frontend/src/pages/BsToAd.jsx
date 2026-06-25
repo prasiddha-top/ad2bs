@@ -1,4 +1,4 @@
-import DateConverter from '../components/DateConverter'
+import TopConverterZone from '../components/TopConverterZone'
 import AdBanner from '../components/AdBanner'
 import TodayDate from '../components/TodayDate'
 import './PageLayout.css'
@@ -6,33 +6,25 @@ import './PageLayout.css'
 export default function BsToAd() {
   return (
     <div className="page">
-      <div className="container">
-        <div className="page-hero">
-          <div className="badge badge-gold">BS → AD Conversion</div>
-          <h1 className="page-title">
-            BS to AD Converter
-          </h1>
-          <p className="page-subtitle">
-            Convert any <strong>Bikram Sambat (BS / Nepali)</strong> date to{' '}
-            <strong>Gregorian (AD / Anno Domini)</strong> calendar date.
-            Supports <strong>BS 1970 to 2100</strong>.
-          </p>
-          <p className="page-subtitle-ne nepali-text">
-            बिएस बाट एडी मा मिति रूपान्तरण गर्नुहोस्
-          </p>
-        </div>
+      {/* ── Top Converter Zone (at the very top of the page) ── */}
+      <TopConverterZone
+        title="BS to AD Converter"
+        subtitle="Convert Bikram Sambat (BS) Nepali calendar dates to Gregorian (AD) dates. Supports BS 1970 to 2100."
+        subtitleNe="बिएस देखि एडी मा मिति रूपान्तरण गर्नुहोस्"
+        defaultMode="bs-to-ad"
+      />
 
+      <div className="container mt-lg">
+        {/* Today date widget */}
         <TodayDate />
 
-        <AdBanner format="horizontal" className="ad-leaderboard mb-lg" />
-
-        <DateConverter defaultMode="bs-to-ad" />
-
-        <div className="flex-center mt-xl">
-          <AdBanner format="rectangle" className="ad-rectangle" />
+        {/* Horizontal Ad banner */}
+        <div className="inline-ad-row mt-md mb-lg">
+          <AdBanner format="horizontal" className="ad-leaderboard" />
         </div>
 
-        <section className="page-info mt-xl">
+        {/* How-To & Info */}
+        <section className="page-info">
           <h2>How to Convert BS to AD</h2>
           <ol className="how-to-list">
             <li>Select the <strong>BS Year</strong> (1970 to 2100)</li>
@@ -58,6 +50,11 @@ export default function BsToAd() {
             ))}
           </div>
         </section>
+
+        {/* Rectangle ad */}
+        <div className="flex-center mt-xl">
+          <AdBanner format="rectangle" className="ad-rectangle" />
+        </div>
       </div>
     </div>
   )

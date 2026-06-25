@@ -1,20 +1,25 @@
+import TopConverterZone from '../components/TopConverterZone'
 import AdBanner from '../components/AdBanner'
 import './PageLayout.css'
 
 export default function About() {
   return (
     <div className="page">
-      <div className="container">
-        <div className="page-hero">
-          <div className="badge badge-primary">About</div>
-          <h1 className="page-title">About AD2BS</h1>
-          <p className="page-subtitle">
-            Nepal's most accurate and comprehensive Bikram Sambat date converter
-          </p>
+      {/* ── Top Converter Zone (at the very top of the page) ── */}
+      <TopConverterZone
+        title="About AD2BS"
+        subtitle="Nepal's most accurate and comprehensive Bikram Sambat date converter."
+        subtitleNe="एडी र बिएस मिति रूपान्तरणको बारेमा"
+        defaultMode="ad-to-bs"
+      />
+
+      <div className="container mt-lg">
+        {/* Horizontal Ad banner */}
+        <div className="inline-ad-row mb-lg">
+          <AdBanner format="horizontal" className="ad-leaderboard" />
         </div>
 
-        <AdBanner format="horizontal" className="ad-leaderboard mb-lg" />
-
+        {/* Detailed Info */}
         <div className="about-section glass-card p-xl">
           <h2>What is AD2BS?</h2>
           <p>
@@ -94,6 +99,7 @@ export default function About() {
           </p>
         </div>
 
+        {/* Rectangle ad */}
         <div className="flex-center mt-xl">
           <AdBanner format="rectangle" className="ad-rectangle" />
         </div>

@@ -1,81 +1,23 @@
 import TodayDate from '../components/TodayDate'
-import DateConverter from '../components/DateConverter'
+import TopConverterZone from '../components/TopConverterZone'
 import AdBanner from '../components/AdBanner'
 import './Home.css'
 
 export default function Home() {
   return (
     <div className="page">
+      {/* ── Top Converter Zone (at the very top of the page) ── */}
+      <TopConverterZone
+        title="AD ↔ BS Nepali Date Converter"
+        subtitle="Convert Gregorian (AD) and Bikram Sambat (BS) Nepali calendar dates instantly. Covers BS 1970–2100 with 100% accuracy."
+        subtitleNe="एडी देखि बिएस र बिएस देखि एडी मा मिति रूपान्तरण"
+        defaultMode="ad-to-bs"
+      />
 
-      {/* ── Hero ─────────────────────────────────── */}
-      <section className="hero-strip" aria-labelledby="hero-heading">
-        <div className="container">
-          <div className="hero-inner">
-            <div className="hero-label">
-              <span>🇳🇵</span>
-              <span>Nepal's Most Accurate Date Converter</span>
-            </div>
-            <h1 id="hero-heading" className="hero-title">
-              AD ↔ BS &nbsp;
-              <span className="hero-title-sub">Nepali Date Converter</span>
-            </h1>
-            <p className="hero-desc">
-              Convert between <strong>AD (Gregorian)</strong> and <strong>BS (Bikram Sambat)</strong> instantly.
-              Covers <strong>BS 1970–2100</strong> with 100% accuracy.
-            </p>
-            <p className="hero-desc-ne nepali-text">
-              एडी देखि बिएस र बिएस देखि एडी मा मिति रूपान्तरण
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Today widget ─────────────────────────── */}
-      <div className="container">
+      {/* ── Rest of the page content ── */}
+      <div className="container mt-lg">
+        {/* Today widget */}
         <TodayDate />
-      </div>
-
-      {/* ── Main section: ad | converter | ad ─────── */}
-      <section className="converter-section" aria-labelledby="converter-heading">
-        <div className="converter-layout">
-
-          {/* LEFT vertical ad */}
-          <aside className="sidebar-ad sidebar-ad--left" aria-label="Advertisement">
-            <div className="vad-label">Ad</div>
-            <ins
-              className="adsbygoogle"
-              style={{ display: 'block', width: '160px', height: '600px' }}
-              data-ad-client="ca-pub-7051110697789992"
-              data-ad-slot="auto"
-              data-ad-format="vertical"
-            />
-          </aside>
-
-          {/* CENTER: heading + converter */}
-          <div className="converter-center">
-            <div className="converter-heading-row">
-              <h2 id="converter-heading" className="converter-heading">Convert Any Date</h2>
-              <p className="converter-heading-sub">Select a direction, enter the date, hit convert.</p>
-            </div>
-            <DateConverter defaultMode="ad-to-bs" />
-          </div>
-
-          {/* RIGHT vertical ad */}
-          <aside className="sidebar-ad sidebar-ad--right" aria-label="Advertisement">
-            <div className="vad-label">Ad</div>
-            <ins
-              className="adsbygoogle"
-              style={{ display: 'block', width: '160px', height: '600px' }}
-              data-ad-client="ca-pub-7051110697789992"
-              data-ad-slot="auto"
-              data-ad-format="vertical"
-            />
-          </aside>
-        </div>
-      </section>
-
-      {/* ── Rest of page ────────────────────────── */}
-      <div className="container">
 
         {/* inline ad after converter */}
         <div className="inline-ad-row">
