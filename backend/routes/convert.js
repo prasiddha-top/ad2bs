@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { adToBs, bsToAd, getToday } = require('../utils/converter');
-const { getDB } = require('../db/database');
+const { run, saveDB } = require('../db/database');
 
 /**
  * GET /api/convert/ad-to-bs
@@ -25,9 +25,11 @@ router.get('/ad-to-bs', (req, res) => {
     
     // Log conversion
     try {
-      const db = getDB();
-      db.prepare(`INSERT INTO conversion_log (direction, input_date, output_date, ip_address) VALUES (?, ?, ?, ?)`)
-        .run('AD_TO_BS', result.ad.formatted, result.bs.formatted, req.ip);
+      run(
+        `INSERT INTO conversion_log (direction, input_date, output_date, ip_address) VALUES (?, ?, ?, ?)`,
+        ['AD_TO_BS', result.ad.formatted, result.bs.formatted, req.ip]
+      );
+      saveDB();
     } catch(e) { /* non-critical */ }
 
     res.json({ success: true, data: result });
@@ -58,9 +60,11 @@ router.get('/bs-to-ad', (req, res) => {
     
     // Log conversion
     try {
-      const db = getDB();
-      db.prepare(`INSERT INTO conversion_log (direction, input_date, output_date, ip_address) VALUES (?, ?, ?, ?)`)
-        .run('BS_TO_AD', result.bs.formatted, result.ad.formatted, req.ip);
+      run(
+        `INSERT INTO conversion_log (direction, input_date, output_date, ip_address) VALUES (?, ?, ?, ?)`,
+        ['BS_TO_AD', result.bs.formatted, result.ad.formatted, req.ip]
+      );
+      saveDB();
     } catch(e) { /* non-critical */ }
 
     res.json({ success: true, data: result });

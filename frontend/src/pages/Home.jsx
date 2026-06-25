@@ -6,164 +6,173 @@ import './Home.css'
 export default function Home() {
   return (
     <div className="page">
+
+      {/* ── Hero ─────────────────────────────────── */}
+      <section className="hero-strip" aria-labelledby="hero-heading">
+        <div className="container">
+          <div className="hero-inner">
+            <div className="hero-label">
+              <span>🇳🇵</span>
+              <span>Nepal's Most Accurate Date Converter</span>
+            </div>
+            <h1 id="hero-heading" className="hero-title">
+              AD ↔ BS &nbsp;
+              <span className="hero-title-sub">Nepali Date Converter</span>
+            </h1>
+            <p className="hero-desc">
+              Convert between <strong>AD (Gregorian)</strong> and <strong>BS (Bikram Sambat)</strong> instantly.
+              Covers <strong>BS 1970–2100</strong> with 100% accuracy.
+            </p>
+            <p className="hero-desc-ne nepali-text">
+              एडी देखि बिएस र बिएस देखि एडी मा मिति रूपान्तरण
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Today widget ─────────────────────────── */}
       <div className="container">
-        {/* Hero Section */}
-        <section className="hero" aria-labelledby="hero-heading">
-          <div className="hero-badge animate-fadeInUp">
-            <span>🇳🇵</span> Nepal's Most Accurate Date Converter
+        <TodayDate />
+      </div>
+
+      {/* ── Main section: ad | converter | ad ─────── */}
+      <section className="converter-section" aria-labelledby="converter-heading">
+        <div className="converter-layout">
+
+          {/* LEFT vertical ad */}
+          <aside className="sidebar-ad sidebar-ad--left" aria-label="Advertisement">
+            <div className="vad-label">Ad</div>
+            <ins
+              className="adsbygoogle"
+              style={{ display: 'block', width: '160px', height: '600px' }}
+              data-ad-client="ca-pub-7051110697789992"
+              data-ad-slot="auto"
+              data-ad-format="vertical"
+            />
+          </aside>
+
+          {/* CENTER: heading + converter */}
+          <div className="converter-center">
+            <div className="converter-heading-row">
+              <h2 id="converter-heading" className="converter-heading">Convert Any Date</h2>
+              <p className="converter-heading-sub">Select a direction, enter the date, hit convert.</p>
+            </div>
+            <DateConverter defaultMode="ad-to-bs" />
           </div>
 
-          <h1 id="hero-heading" className="hero-title animate-fadeInUp stagger-1">
-            <span className="text-gradient">AD ↔ BS</span>
-            <br />
-            Nepali Date Converter
-          </h1>
+          {/* RIGHT vertical ad */}
+          <aside className="sidebar-ad sidebar-ad--right" aria-label="Advertisement">
+            <div className="vad-label">Ad</div>
+            <ins
+              className="adsbygoogle"
+              style={{ display: 'block', width: '160px', height: '600px' }}
+              data-ad-client="ca-pub-7051110697789992"
+              data-ad-slot="auto"
+              data-ad-format="vertical"
+            />
+          </aside>
+        </div>
+      </section>
 
-          <p className="hero-subtitle animate-fadeInUp stagger-2">
-            Convert between <strong>AD (Anno Domini / Gregorian)</strong> and{' '}
-            <strong>BS (Bikram Sambat / Nepali)</strong> calendar dates instantly.
-            Accurate lookup-table conversion covering <strong>BS 1970–2100</strong>.
-          </p>
+      {/* ── Rest of page ────────────────────────── */}
+      <div className="container">
 
-          <p className="hero-subtitle-ne nepali-text animate-fadeInUp stagger-3">
-            एडी देखि बिएस र बिएस देखि एडी मा मिति रूपान्तरण गर्नुहोस्
-          </p>
-        </section>
-
-        {/* Today's Date Widget */}
-        <section aria-label="Today's date">
-          <TodayDate />
-        </section>
-
-        {/* Top Ad Banner */}
-        <div className="ad-slot ad-top">
+        {/* inline ad after converter */}
+        <div className="inline-ad-row">
           <AdBanner format="horizontal" className="ad-leaderboard" />
         </div>
 
-        {/* Main Converter */}
-        <section className="converter-section" aria-labelledby="converter-heading">
-          <h2 id="converter-heading" className="section-title text-center">
-            Convert Any Date
-          </h2>
-          <DateConverter defaultMode="ad-to-bs" />
-        </section>
-
-        {/* Mid-page Ad */}
-        <div className="ad-slot ad-mid flex-center mt-xl">
-          <AdBanner format="rectangle" className="ad-rectangle" />
-        </div>
-
-        {/* Info Section */}
-        <section className="info-section mt-xl" aria-labelledby="info-heading">
-          <h2 id="info-heading" className="section-title text-center mb-lg">
-            About Bikram Sambat Calendar
-          </h2>
-
-          <div className="grid-3">
-            <article className="info-card glass-card p-lg animate-fadeInUp stagger-1">
-              <div className="info-icon">📅</div>
-              <h3>What is BS?</h3>
-              <p>
-                Bikram Sambat (BS) is Nepal's official calendar system, approximately
-                <strong> 56 years and 8 months</strong> ahead of the Gregorian (AD) calendar.
-                It is a solar calendar based on ancient Hindu traditions.
-              </p>
+        {/* Info cards */}
+        <section className="info-section" aria-labelledby="info-heading">
+          <h2 id="info-heading" className="section-title">About Bikram Sambat</h2>
+          <div className="info-grid">
+            <article className="info-card">
+              <div className="info-card-icon">📅</div>
+              <div className="info-card-body">
+                <h3>What is BS?</h3>
+                <p>Bikram Sambat (BS) is Nepal's official calendar,
+                approximately <strong>56 years 8 months</strong> ahead
+                of the Gregorian calendar. Based on ancient Hindu traditions.</p>
+              </div>
             </article>
-
-            <article className="info-card glass-card p-lg animate-fadeInUp stagger-2">
-              <div className="info-icon">🔄</div>
-              <h3>How it Works</h3>
-              <p>
-                Our converter uses an official <strong>lookup table database</strong> covering
-                BS 1970–2100. Each Nepali month has between 29–32 days that vary year to year,
-                making a simple formula impossible.
-              </p>
+            <article className="info-card">
+              <div className="info-card-icon">🗃️</div>
+              <div className="info-card-body">
+                <h3>How it Works</h3>
+                <p>Uses an official <strong>lookup-table database</strong>
+                covering BS 1970–2100. Each Nepali month has 29–32 days
+                that vary per year — a formula can't work here.</p>
+              </div>
             </article>
-
-            <article className="info-card glass-card p-lg animate-fadeInUp stagger-3">
-              <div className="info-icon">✅</div>
-              <h3>100% Accurate</h3>
-              <p>
-                Based on official Nepal government calendar data. Supports
-                <strong> 131 years</strong> of data from BS 1970 to BS 2100.
-                New years start in <strong>Baisakh (April)</strong>.
-              </p>
+            <article className="info-card">
+              <div className="info-card-icon">✅</div>
+              <div className="info-card-body">
+                <h3>100% Accurate</h3>
+                <p>Official Nepal government calendar data.
+                <strong> 131 years</strong> of data (BS 1970–2100).
+                New year starts on <strong>1 Baisakh</strong> (mid-April).</p>
+              </div>
             </article>
           </div>
         </section>
 
-        {/* Nepali Months Table */}
-        <section className="months-section mt-xl" aria-labelledby="months-heading">
-          <h2 id="months-heading" className="section-title text-center mb-lg">
-            Nepali Month Names
-          </h2>
-          <div className="months-table glass-card">
-            <div className="months-grid">
-              {[
-                { num: 1, en: 'Baisakh', ne: 'बैशाख', season: 'Spring', approx: 'Apr-May' },
-                { num: 2, en: 'Jestha', ne: 'जेठ', season: 'Spring', approx: 'May-Jun' },
-                { num: 3, en: 'Ashadh', ne: 'असार', season: 'Summer', approx: 'Jun-Jul' },
-                { num: 4, en: 'Shrawan', ne: 'साउन', season: 'Monsoon', approx: 'Jul-Aug' },
-                { num: 5, en: 'Bhadra', ne: 'भाद्र', season: 'Monsoon', approx: 'Aug-Sep' },
-                { num: 6, en: 'Ashwin', ne: 'आश्विन', season: 'Autumn', approx: 'Sep-Oct' },
-                { num: 7, en: 'Kartik', ne: 'कार्तिक', season: 'Autumn', approx: 'Oct-Nov' },
-                { num: 8, en: 'Mangsir', ne: 'मंसिर', season: 'Winter', approx: 'Nov-Dec' },
-                { num: 9, en: 'Poush', ne: 'पुष', season: 'Winter', approx: 'Dec-Jan' },
-                { num: 10, en: 'Magh', ne: 'माघ', season: 'Winter', approx: 'Jan-Feb' },
-                { num: 11, en: 'Falgun', ne: 'फाल्गुन', season: 'Spring', approx: 'Feb-Mar' },
-                { num: 12, en: 'Chaitra', ne: 'चैत', season: 'Spring', approx: 'Mar-Apr' },
-              ].map(m => (
-                <div key={m.num} className="month-row">
-                  <span className="month-num">{m.num}</span>
-                  <span className="month-en">{m.en}</span>
-                  <span className="month-ne nepali-text">{m.ne}</span>
-                  <span className="month-approx text-muted">{m.approx}</span>
-                </div>
-              ))}
-            </div>
+        {/* Months table */}
+        <section className="months-section" aria-labelledby="months-heading">
+          <h2 id="months-heading" className="section-title">Nepali Month Names</h2>
+          <div className="months-table">
+            {[
+              { num:1,  en:'Baisakh', ne:'बैशाख',  approx:'Apr–May' },
+              { num:2,  en:'Jestha',  ne:'जेठ',    approx:'May–Jun' },
+              { num:3,  en:'Ashadh',  ne:'असार',   approx:'Jun–Jul' },
+              { num:4,  en:'Shrawan', ne:'साउन',   approx:'Jul–Aug' },
+              { num:5,  en:'Bhadra',  ne:'भाद्र',  approx:'Aug–Sep' },
+              { num:6,  en:'Ashwin',  ne:'आश्विन', approx:'Sep–Oct' },
+              { num:7,  en:'Kartik',  ne:'कार्तिक',approx:'Oct–Nov' },
+              { num:8,  en:'Mangsir', ne:'मंसिर',  approx:'Nov–Dec' },
+              { num:9,  en:'Poush',   ne:'पुष',    approx:'Dec–Jan' },
+              { num:10, en:'Magh',    ne:'माघ',    approx:'Jan–Feb' },
+              { num:11, en:'Falgun',  ne:'फाल्गुन',approx:'Feb–Mar' },
+              { num:12, en:'Chaitra', ne:'चैत',    approx:'Mar–Apr' },
+            ].map(m => (
+              <div key={m.num} className="month-row">
+                <span className="month-num">{String(m.num).padStart(2,'0')}</span>
+                <span className="month-en">{m.en}</span>
+                <span className="month-ne nepali-text">{m.ne}</span>
+                <span className="month-approx">{m.approx}</span>
+              </div>
+            ))}
           </div>
         </section>
 
-        {/* FAQ Section */}
-        <section className="faq-section mt-xl" aria-labelledby="faq-heading">
-          <h2 id="faq-heading" className="section-title text-center mb-lg">
-            Frequently Asked Questions
-          </h2>
+        {/* FAQ */}
+        <section className="faq-section" aria-labelledby="faq-heading">
+          <h2 id="faq-heading" className="section-title">Frequently Asked Questions</h2>
           <div className="faq-list">
             {[
-              {
-                q: "What is the difference between AD and BS?",
-                a: "AD (Anno Domini) is the Gregorian calendar used worldwide. BS (Bikram Sambat) is Nepal's official calendar, which is currently about 56 years and 8 months ahead. For example, 2083 BS corresponds to 2026-2027 AD."
-              },
-              {
-                q: "How many days are in a Nepali month?",
-                a: "Nepali months (BS) have between 29 and 32 days. The number of days varies each year because the Bikram Sambat calendar aligns with both solar and astronomical events. Baisakh usually has 30-31 days."
-              },
-              {
-                q: "When does the Nepali New Year start?",
-                a: "The Nepali New Year starts on 1st Baisakh (BS), which falls in mid-April in the Gregorian calendar. In 2026 AD, the Nepali New Year 2083 BS started on April 13."
-              },
-              {
-                q: "What is today's date in Nepali calendar?",
-                a: "You can see today's date in both AD and BS at the top of this page. Use the 'Today' button in the converter to instantly see the current Bikram Sambat date."
-              },
-              {
-                q: "How accurate is this converter?",
-                a: "Very accurate. Our converter uses an official lookup table database with day-by-day data for BS 1970–2100, sourced from official Nepal government calendar data."
-              }
+              { q:"What is the difference between AD and BS?",
+                a:"AD (Anno Domini) is the worldwide Gregorian calendar. BS (Bikram Sambat) is Nepal's official calendar, currently about 56 years 8 months ahead. Example: 2083 BS = 2026–2027 AD." },
+              { q:"How many days are in a Nepali month?",
+                a:"Between 29 and 32 days, varying each year because BS aligns with both solar and astronomical events. Baisakh usually has 30–31 days." },
+              { q:"When does the Nepali New Year start?",
+                a:"1st Baisakh (BS), which falls around April 13–14 in the Gregorian calendar. In 2026 AD, Nepali New Year 2083 BS started on April 13." },
+              { q:"What is today's date in Nepali calendar?",
+                a:"See the widget at the top of this page, or click the 'Today' button in the converter for the current Bikram Sambat date." },
+              { q:"How accurate is this converter?",
+                a:"Very accurate. We use an official lookup-table database covering BS 1970–2100 with day-by-day precision." },
             ].map((item, i) => (
-              <details key={i} className="faq-item glass-card">
-                <summary className="faq-question">{item.q}</summary>
-                <p className="faq-answer">{item.a}</p>
+              <details key={i} className="faq-item">
+                <summary className="faq-q">{item.q}</summary>
+                <p className="faq-a">{item.a}</p>
               </details>
             ))}
           </div>
         </section>
 
-        {/* Bottom Ad */}
-        <div className="ad-slot ad-bottom flex-center mt-xl">
+        {/* Bottom ad */}
+        <div className="inline-ad-row">
           <AdBanner format="auto" className="ad-leaderboard" />
         </div>
+
       </div>
     </div>
   )
