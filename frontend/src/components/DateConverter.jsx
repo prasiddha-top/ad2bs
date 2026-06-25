@@ -226,7 +226,9 @@ export default function DateConverter({ defaultMode = 'ad-to-bs' }) {
                 {mode === 'bs-to-ad' && (
                   <p className="dc-result-ne nepali-text">{result.bs.formattedNe}</p>
                 )}
-                <p className="dc-result-day">{result.ad.dayNameEn}</p>
+                <p className={`dc-result-day ${mode === 'bs-to-ad' ? 'nepali-text' : ''}`}>
+                  {mode === 'ad-to-bs' ? result.ad.dayNameEn : result.bs.dayNameNe}
+                </p>
               </div>
 
               {/* Arrow separator */}
@@ -243,7 +245,9 @@ export default function DateConverter({ defaultMode = 'ad-to-bs' }) {
                 {mode === 'ad-to-bs' && (
                   <p className="dc-result-ne nepali-text">{result.bs.formattedNe}</p>
                 )}
-                <p className="dc-result-day nepali-text">{result.bs.dayNameNe}</p>
+                <p className={`dc-result-day ${mode === 'ad-to-bs' ? 'nepali-text' : ''}`}>
+                  {mode === 'ad-to-bs' ? result.bs.dayNameNe : result.ad.dayNameEn}
+                </p>
               </div>
             </div>
 
