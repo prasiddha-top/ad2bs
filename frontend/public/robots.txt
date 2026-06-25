@@ -1,6 +1,12 @@
 User-agent: *
 Allow: /
 
+User-agent: Mediapartners-Google
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
 Sitemap: https://ad2bs.prasiddha.top/sitemap.xml
 
 # Disallow admin/API routes
