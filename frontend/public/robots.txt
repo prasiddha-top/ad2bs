@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://ad2bs.prasiddha.top/sitemap.xml
+
+# Disallow admin/API routes
+Disallow: /api/

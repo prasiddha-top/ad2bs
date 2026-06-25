@@ -1,0 +1,183 @@
+/* Home Page Styles */
+
+/* Hero */
+.hero {
+  text-align: center;
+  padding: var(--space-2xl) 0 var(--space-xl);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 8px 20px;
+  background: rgba(192,57,43,0.1);
+  border: 1px solid rgba(192,57,43,0.3);
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--crimson-light);
+  letter-spacing: 0.03em;
+  margin-bottom: var(--space-lg);
+  animation: fadeInUp 0.5s ease forwards;
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--space-lg);
+  line-height: 1.1;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--space-sm);
+  max-width: 650px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero-subtitle-ne {
+  font-size: 1rem;
+  color: var(--saffron);
+  margin-bottom: 0;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 650px;
+}
+
+/* Section Title */
+.section-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 800;
+  margin-bottom: var(--space-lg);
+}
+
+/* Converter Section */
+.converter-section {
+  padding: var(--space-xl) 0;
+}
+
+/* Ad Slots */
+.ad-slot {
+  margin: var(--space-xl) 0;
+}
+
+/* Info Cards */
+.info-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.info-icon {
+  font-size: 2rem;
+  margin-bottom: var(--space-sm);
+}
+
+.info-card h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.info-card p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* Months Table */
+.months-table {
+  overflow: hidden;
+}
+
+.months-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.month-row {
+  display: grid;
+  grid-template-columns: 30px 1fr 80px 80px;
+  gap: var(--space-md);
+  align-items: center;
+  padding: 14px var(--space-lg);
+  border-bottom: 1px solid var(--border-glass);
+  transition: background var(--transition-fast);
+  font-size: 0.9rem;
+}
+
+.month-row:hover { background: rgba(255,255,255,0.03); }
+.month-row:last-child { border-bottom: none; }
+
+.month-num {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.06);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.month-en { font-weight: 600; color: var(--text-primary); }
+.month-ne { color: var(--saffron); font-size: 0.9rem; }
+.month-approx { font-size: 0.8rem; }
+
+/* FAQ */
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-item {
+  overflow: hidden;
+}
+
+.faq-question {
+  padding: var(--space-lg);
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-md);
+  color: var(--text-primary);
+  user-select: none;
+  transition: color var(--transition-fast);
+}
+
+.faq-question::-webkit-details-marker { display: none; }
+.faq-question::after { content: '+'; font-size: 1.2rem; color: var(--crimson-light); flex-shrink: 0; transition: transform var(--transition-base); }
+.faq-item[open] .faq-question::after { transform: rotate(45deg); }
+.faq-question:hover { color: var(--crimson-light); }
+
+.faq-answer {
+  padding: 0 var(--space-lg) var(--space-lg);
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  border-top: 1px solid var(--border-glass);
+  padding-top: var(--space-md);
+  margin-top: 0;
+}
+
+@media (max-width: 768px) {
+  .months-grid { grid-template-columns: 1fr; }
+  .month-row { grid-template-columns: 24px 1fr 70px; }
+  .month-approx { display: none; }
+  .hero { padding: var(--space-xl) 0 var(--space-lg); }
+}
