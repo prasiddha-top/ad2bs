@@ -1,7 +1,6 @@
 import { useState, useCallback, useEffect } from 'react'
+import { adToBs, bsToAd, getToday } from '../utils/nepaliDateConverter'
 import './DateConverter.css'
-
-const API_BASE = import.meta.env.VITE_API_URL || ''
 
 const BS_MONTHS = [
   { num: 1,  en: 'Baisakh',  ne: 'बैशाख'  },
@@ -25,7 +24,6 @@ const AD_MONTHS = [
 
 export default function DateConverter({ defaultMode = 'ad-to-bs' }) {
   const [mode, setMode]       = useState(defaultMode)
-  const [loading, setLoading] = useState(false)
   const [result, setResult]   = useState(null)
   const [error, setError]     = useState(null)
 
@@ -44,38 +42,38 @@ export default function DateConverter({ defaultMode = 'ad-to-bs' }) {
     setError(null)
   }, [defaultMode])
 
-  const handleConvert = useCallback(async () => {
-    setLoading(true); setError(null); setResult(null)
+  const handleConvert = useCallback(() => {
+    setError(null)
+    setResult(null)
     try {
-      const url = mode === 'ad-to-bs'
-        ? `${API_BASE}/api/convert/ad-to-bs?year=${adYear}&month=${adMonth}&day=${adDay}`
-        : `${API_BASE}/api/convert/bs-to-ad?year=${bsYear}&month=${bsMonth}&day=${bsDay}`
-      const res  = await fetch(url)
-      const data = await res.json()
-      if (!res.ok || !data.success) throw new Error(data.error || 'Conversion failed')
-      setResult(data.data)
+      const data = mode === 'ad-to-bs'
+        ? adToBs(adYear, adMonth, adDay)
+        : bsToAd(bsYear, bsMonth, bsDay)
+      setResult(data)
     } catch (err) {
       setError(err.message)
-    } finally {
-      setLoading(false)
     }
   }, [mode, adYear, adMonth, adDay, bsYear, bsMonth, bsDay])
 
-  const handleToday = useCallback(async () => {
+  const handleToday = useCallback(() => {
     const now = new Date()
-    setAdYear(now.getFullYear()); setAdMonth(now.getMonth() + 1); setAdDay(now.getDate())
-    setMode('ad-to-bs'); setLoading(true); setError(null)
+    setAdYear(now.getFullYear())
+    setAdMonth(now.getMonth() + 1)
+    setAdDay(now.getDate())
+    setMode('ad-to-bs')
+    setError(null)
     try {
-      const res  = await fetch(`${API_BASE}/api/convert/today`)
-      const data = await res.json()
-      if (data.success) setResult(data.data)
-    } catch { setError("Could not load today's date") }
-    finally { setLoading(false) }
+      const data = getToday()
+      setResult(data)
+    } catch {
+      setError("Could not load today's date")
+    }
   }, [])
 
   const handleSwap = () => {
     setMode(m => m === 'ad-to-bs' ? 'bs-to-ad' : 'ad-to-bs')
-    setResult(null); setError(null)
+    setResult(null)
+    setError(null)
   }
 
   const adYears = Array.from({ length: 131 }, (_, i) => 1913 + i)
@@ -181,20 +179,11 @@ export default function DateConverter({ defaultMode = 'ad-to-bs' }) {
           id="btn-convert"
           className="dc-convert-btn"
           onClick={handleConvert}
-          disabled={loading}
-          aria-busy={loading}
         >
-          {loading ? (
-            <span className="dc-spinner-row">
-              <span className="dc-spinner" />
-              <span>Converting...</span>
-            </span>
-          ) : (
-            <span className="dc-btn-row">
-              <svg className="dc-btn-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
-              <span>Convert Date</span>
-            </span>
-          )}
+          <span className="dc-btn-row">
+            <svg className="dc-btn-svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+            <span>Convert Date</span>
+          </span>
         </button>
 
         {/* error */}

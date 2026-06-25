@@ -1,18 +1,20 @@
 import { useState, useEffect } from 'react'
+import { getToday } from '../utils/nepaliDateConverter'
 import './TodayDate.css'
-
-const API_BASE = import.meta.env.VITE_API_URL || ''
 
 export default function TodayDate() {
   const [today, setToday] = useState(null)
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetch(`${API_BASE}/api/convert/today`)
-      .then(r => r.json())
-      .then(d => { if (d.success) setToday(d.data) })
-      .catch(() => {})
-      .finally(() => setLoading(false))
+    try {
+      const data = getToday()
+      setToday(data)
+    } catch (e) {
+      console.error(e)
+    } finally {
+      setLoading(false)
+    }
   }, [])
 
   if (loading) {

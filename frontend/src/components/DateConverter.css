@@ -1,6 +1,6 @@
 /* ─────────────────────────────────────────────
    DateConverter — Premium Human-Crafted Aesthetic
-   No glow soup. Minimal, structured, and elegant.
+   Supports Light & Dark Modes via CSS Variables
 ───────────────────────────────────────────── */
 
 .dc-root {
@@ -16,8 +16,8 @@
 
 .dc-tabs {
   display: flex;
-  background: #111122;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg-input);
+  border: 1px solid var(--border-glass);
   padding: 4px;
   border-radius: 10px;
   width: 100%;
@@ -40,18 +40,18 @@
   font-family: var(--font-primary);
   font-size: 0.9rem;
   font-weight: 600;
-  color: #8888a5;
+  color: var(--text-secondary);
   outline: none;
 }
 
 .dc-tab:hover {
-  color: #c8c8e6;
+  color: var(--text-primary);
 }
 
 .dc-tab--active {
-  background: #1a1a2e;
-  color: #f0f0f8;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
   border: 1.5px solid var(--crimson);
 }
 
@@ -61,10 +61,11 @@
 
 /* ── Card Container ─────────────────────────── */
 .dc-card {
-  background: #111120;
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: var(--bg-card);
+  border: 1px solid var(--border-glass);
   border-radius: 14px;
   padding: 24px;
+  box-shadow: var(--shadow-md);
 }
 
 .dc-card-top {
@@ -78,7 +79,7 @@
 .dc-card-title {
   font-size: 0.75rem;
   font-weight: 700;
-  color: #6a6a8c;
+  color: var(--text-muted);
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
@@ -93,10 +94,10 @@
   align-items: center;
   gap: 6px;
   padding: 6px 12px;
-  background: #18182a;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg-input);
+  border: 1px solid var(--border-glass);
   border-radius: 6px;
-  color: #8a8ab0;
+  color: var(--text-secondary);
   font-size: 0.78rem;
   font-weight: 600;
   cursor: pointer;
@@ -105,13 +106,13 @@
 }
 
 .dc-action-btn:hover {
-  background: #202038;
-  color: #e0e0ff;
-  border-color: rgba(255, 255, 255, 0.15);
+  background: var(--bg-card-hover);
+  color: var(--text-primary);
+  border-color: var(--border-hover);
 }
 
 .dc-action-btn svg {
-  color: #c0392b;
+  color: var(--crimson-light);
 }
 
 /* ── Fields grid ────────────────────────────── */
@@ -139,7 +140,7 @@
 .dc-label {
   font-size: 0.68rem;
   font-weight: 700;
-  color: #6a6a8c;
+  color: var(--text-muted);
   letter-spacing: 0.05em;
   text-transform: uppercase;
 }
@@ -147,10 +148,10 @@
 .dc-select {
   width: 100%;
   padding: 10px 32px 10px 12px;
-  background: #0b0b16;
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: var(--bg-input);
+  border: 1px solid var(--border-glass);
   border-radius: 8px;
-  color: #e0e0f0;
+  color: var(--text-primary);
   font-size: 0.92rem;
   font-family: var(--font-primary);
   appearance: none;
@@ -164,12 +165,12 @@
 }
 
 .dc-select:focus {
-  border-color: rgba(192, 57, 43, 0.5);
+  border-color: var(--crimson);
   box-shadow: 0 0 0 2px rgba(192, 57, 43, 0.15);
 }
 
 .dc-select:hover {
-  border-color: rgba(255, 255, 255, 0.16);
+  border-color: var(--border-hover);
 }
 
 /* ── Convert Button ─────────────────────────── */
@@ -179,7 +180,7 @@
   justify-content: center;
   width: 100%;
   padding: 13px 20px;
-  background: #c0392b;
+  background: var(--crimson);
   color: #ffffff;
   font-size: 0.92rem;
   font-weight: 700;
@@ -192,7 +193,7 @@
 }
 
 .dc-convert-btn:hover:not(:disabled) {
-  background: #d94332;
+  background: var(--crimson-light);
 }
 
 .dc-convert-btn:active:not(:disabled) {
@@ -234,13 +235,13 @@
   background: rgba(192, 57, 43, 0.08);
   border: 1px solid rgba(192, 57, 43, 0.2);
   border-radius: 8px;
-  color: #ff7d7d;
+  color: var(--text-accent);
   font-size: 0.84rem;
   font-weight: 500;
 }
 
 .dc-error svg {
-  color: #e74c3c;
+  color: var(--crimson-light);
   flex-shrink: 0;
 }
 
@@ -262,7 +263,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: #6a6a8c;
+  color: var(--text-muted);
 }
 
 .dc-accurate-badge {
@@ -286,8 +287,8 @@
   display: grid;
   grid-template-columns: 1fr 32px 1fr;
   align-items: center;
-  background: #0b0b14;
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: var(--bg-primary);
+  border: 1px solid var(--border-glass);
   border-radius: 10px;
   overflow: hidden;
   margin-bottom: 10px;
@@ -301,18 +302,18 @@
 }
 
 .dc-result-side--from {
-  background: #0e0e1a;
+  background: var(--bg-card);
 }
 
 .dc-result-side--to {
-  background: #110e1a;
+  background: var(--bg-secondary);
 }
 
 .dc-result-divider {
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #c0392b;
+  color: var(--crimson);
   height: 100%;
 }
 
@@ -321,18 +322,18 @@
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: #555577;
+  color: var(--text-muted);
 }
 
 .dc-result-main {
   font-size: 0.95rem;
   font-weight: 700;
-  color: #e0e0f0;
+  color: var(--text-primary);
   line-height: 1.3;
 }
 
 .dc-result-main--highlight {
-  color: #e67e22;
+  color: var(--saffron);
 }
 
 .dc-result-ne {
@@ -341,9 +342,13 @@
   font-family: var(--font-nepali);
 }
 
+html[data-theme="light"] .dc-result-ne {
+  color: #8c7333;
+}
+
 .dc-result-day {
   font-size: 0.74rem;
-  color: #55557a;
+  color: var(--text-muted);
 }
 
 /* meta footer strip */
@@ -352,19 +357,19 @@
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
-  background: #0b0b14;
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: var(--bg-input);
+  border: 1px solid var(--border-glass);
   border-radius: 8px;
   font-size: 0.76rem;
-  color: #5d5d85;
+  color: var(--text-muted);
 }
 
 .dc-result-meta strong {
-  color: #8c8caf;
+  color: var(--text-secondary);
 }
 
 .dc-meta-sep {
-  color: #2b2b40;
+  color: var(--border-glass);
   font-weight: 300;
 }
 
